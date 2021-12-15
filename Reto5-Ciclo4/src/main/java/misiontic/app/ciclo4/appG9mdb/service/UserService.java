@@ -46,7 +46,7 @@ public class UserService {
 
         if (user.getId() != null) {
             Optional<User> userDb = userRepository.getUser(user.getId());
-            if (!userDb.isEmpty()) {
+            if (userDb.isPresent()) {
                 if (user.getIdentification() != null) {
                     userDb.get().setIdentification(user.getIdentification());
                 }

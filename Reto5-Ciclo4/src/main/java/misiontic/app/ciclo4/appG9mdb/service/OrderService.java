@@ -43,7 +43,7 @@ public class OrderService {
 
         if (order.getId() != null) {
             Optional<Order> orderDb = orderRepository.getOrder(order.getId());
-            if (!orderDb.isEmpty()) {
+            if (orderDb.isPresent()) {
                 if (order.getStatus() != null) {
                     orderDb.get().setStatus(order.getStatus());
                 }
@@ -65,26 +65,26 @@ public class OrderService {
         return aBoolean;
     }
 
-    //Ordenes de pedido asociadas a los asesores de una zona
+    // Ordenes de pedido asociadas a los asesores de una zona
     public List<Order> findByZone(String zona) {
         return orderRepository.findByZone(zona);
     }
 
-    public List<Order> findByStatus(String status, int idSales){
-        return orderRepository.findByStatus(status,idSales);
+    public List<Order> findByStatus(String status, int idSales) {
+        return orderRepository.findByStatus(status, idSales);
     }
 
-    public List<Order> findBySalesMan(int idSales){
+    public List<Order> findBySalesMan(int idSales) {
         return orderRepository.findBySalesMan(idSales);
     }
 
-    public List<Order> findByRegisterDay(String date, int idSales){
+    public List<Order> findByRegisterDay(String date, int idSales) {
         SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFormat = new Date();
-        try{
-            dateFormat= parse.parse(date);
+        try {
+            dateFormat = parse.parse(date);
 
-        }catch(ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return orderRepository.findByRegisterDate(dateFormat, idSales);

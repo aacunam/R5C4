@@ -40,9 +40,9 @@ public class FootwearService {
 
         if (footwear.getReference() != null) {
             Optional<Footwear> footwearDb = footwearRepository.getFootwear(footwear.getReference());
-            if (!footwearDb.isEmpty()) {
+            if (footwearDb.isPresent()) {
 
-                if (footwear.getBrand()!= null) {
+                if (footwear.getBrand() != null) {
                     footwearDb.get().setBrand(footwear.getBrand());
                 }
 
@@ -92,12 +92,13 @@ public class FootwearService {
         return aBoolean;
     }
 
-    //* Reto 5 metodos
-    public List<Footwear> getProductByPrice(String price){
+    // * Reto 5 metodos
+    public List<Footwear> getProductByPrice(String price) {
         double priceValue = Double.parseDouble(price);
         return footwearRepository.getProductbyPrice(priceValue);
     }
-    public List<Footwear> getProductByDescription(String description){
+
+    public List<Footwear> getProductByDescription(String description) {
         return footwearRepository.getProductByDescription(description);
     }
 }
